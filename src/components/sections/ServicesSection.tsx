@@ -25,7 +25,7 @@ const ServicesSection = () => {
     },
     {
       icon: Shield,
-      title: 'Cyber Services',
+      title: 'Cybersecurity',
       description: 'Comprehensive cybersecurity solutions for digital protection',
       features: [
         'Penetration Testing',
@@ -107,7 +107,7 @@ const ServicesSection = () => {
               </a>
 
               {/* Expandable features for cyber services */}
-              {service.title === 'Cyber Services' && (
+              {service.title === 'Cybersecurity' && (
                 <div className="w-full px-4">
                   <button
                     onClick={() => setExpandedService(expandedService === service.title ? null : service.title)}
@@ -148,7 +148,7 @@ const ServicesSection = () => {
               )}
 
               {/* Regular features for other services */}
-              {service.title !== 'Cyber Services' && (
+              {service.title !== 'Cybersecurity' && (
                 <div className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <motion.div
