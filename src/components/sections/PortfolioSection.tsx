@@ -118,7 +118,7 @@ const PortfolioSection = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="portfolio-card bg-card border border-border"
+              className="portfolio-card bg-card border border-border group"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
