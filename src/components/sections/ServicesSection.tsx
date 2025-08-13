@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Code, Wrench, Shield } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Code, Wrench, Shield, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ServicesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [expandedService, setExpandedService] = useState<string | null>(null);
 
   const services = [
     {
@@ -13,18 +14,40 @@ const ServicesSection = () => {
       title: 'Web Development',
       description: 'Responsive websites & custom applications built with modern technologies',
       features: ['React & JavaScript', 'Responsive Design', 'Custom Applications', 'E-commerce Solutions'],
+      link: '#portfolio'
     },
     {
       icon: Wrench,
       title: 'IT Support',
       description: 'Fast troubleshooting & comprehensive system maintenance services',
       features: ['Hardware Diagnostics', 'Software Installation', 'Network Setup', 'System Optimization'],
+      link: '#contact'
     },
     {
       icon: Shield,
-      title: 'Cybersecurity',
-      description: 'Secure systems & network protection for your digital assets',
-      features: ['Security Audits', 'Network Protection', 'Data Encryption', 'Threat Assessment'],
+      title: 'Cyber Services',
+      description: 'Comprehensive cybersecurity solutions for digital protection',
+      features: [
+        'Penetration Testing',
+        'Vulnerability Assessment', 
+        'Security Audits',
+        'Incident Response',
+        'Malware Analysis',
+        'Digital Forensics',
+        'Security Training',
+        'Compliance Consulting'
+      ],
+      link: 'https://www.cybersecurity.org',
+      subServices: [
+        { name: 'Penetration Testing', link: 'https://www.sans.org/penetration-testing/' },
+        { name: 'Vulnerability Assessment', link: 'https://www.nist.gov/cybersecurity' },
+        { name: 'Security Audits', link: 'https://www.cisecurity.org/' },
+        { name: 'Incident Response', link: 'https://www.cert.org/' },
+        { name: 'Malware Analysis', link: 'https://www.virustotal.com/' },
+        { name: 'Digital Forensics', link: 'https://www.sans.org/digital-forensics/' },
+        { name: 'Security Training', link: 'https://www.cybrary.it/' },
+        { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' }
+      ]
     },
   ];
 
@@ -50,7 +73,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="service-card text-center h-80 w-80 mx-auto flex flex-col items-center justify-center group"
+              className="service-card text-center min-h-80 w-80 mx-auto flex flex-col items-center justify-center group relative"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -72,17 +95,72 @@ const ServicesSection = () => {
                 {service.description}
               </p>
 
-              <div className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <motion.div
-                    key={feature}
-                    className="text-sm text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ transitionDelay: `${featureIndex * 100}ms` }}
+              {/* Main service link */}
+              <a
+                href={service.link}
+                target={service.link.startsWith('http') ? '_blank' : '_self'}
+                rel={service.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors duration-300 mb-4"
+              >
+                <span>Learn More</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+
+              {/* Expandable features for cyber services */}
+              {service.title === 'Cyber Services' && (
+                <div className="w-full px-4">
+                  <button
+                    onClick={() => setExpandedService(expandedService === service.title ? null : service.title)}
+                    className="flex items-center justify-center gap-2 text-accent hover:text-accent/80 transition-colors duration-300 mb-2"
                   >
-                    • {feature}
+                    <span>View Services</span>
+                    {expandedService === service.title ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
+                  </button>
+                  
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={expandedService === service.title ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="space-y-2 py-2">
+                      {service.subServices?.map((subService, subIndex) => (
+                        <a
+                          key={subService.name}
+                          href={subService.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-sm text-muted-foreground hover:text-accent transition-colors duration-300 group/link"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span>• {subService.name}</span>
+                            <ExternalLink className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        </a>
+                      ))}
+                    </div>
                   </motion.div>
-                ))}
-              </div>
+                </div>
+              )}
+
+              {/* Regular features for other services */}
+              {service.title !== 'Cyber Services' && (
+                <div className="space-y-2">
+                  {service.features.map((feature, featureIndex) => (
+                    <motion.div
+                      key={feature}
+                      className="text-sm text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      style={{ transitionDelay: `${featureIndex * 100}ms` }}
+                    >
+                      • {feature}
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
