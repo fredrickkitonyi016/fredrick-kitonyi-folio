@@ -50,7 +50,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="service-card text-center h-80 w-80 mx-auto flex flex-col items-center justify-center"
+              className="service-card text-center h-80 w-80 mx-auto flex flex-col items-center justify-center group"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}

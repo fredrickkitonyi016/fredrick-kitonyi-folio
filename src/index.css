@@ -126,7 +126,7 @@ All colors MUST be HSL.
   .service-card {
     @apply bg-card/50 backdrop-blur-sm border border-border rounded-full p-8;
     @apply transition-all duration-500 hover:scale-110 hover:bg-accent/10 hover:border-accent;
-    @apply cursor-pointer group;
+    @apply cursor-pointer;
   }
 
   /* Skill progress bars */
