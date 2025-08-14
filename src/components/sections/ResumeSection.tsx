@@ -3,14 +3,123 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Download, FileText, User, GraduationCap, Briefcase, Award, BookOpen, Trophy, Code } from 'lucide-react';
 import { toast } from 'sonner';
+import jsPDF from 'jspdf';
 
 const ResumeSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const handleDownload = () => {
-    // For now, show a toast. In a real implementation, this would trigger a PDF download
-    toast.success('Resume download will be available soon!');
+    try {
+      const pdf = new jsPDF();
+      const margin = 20;
+      let yPosition = margin;
+      
+      // Helper function to add text with word wrapping
+      const addText = (text: string, fontSize = 10, isBold = false, maxWidth = 170) => {
+        pdf.setFontSize(fontSize);
+        const font = isBold ? 'helvetica' : 'helvetica';
+        const weight = isBold ? 'bold' : 'normal';
+        pdf.setFont(font, weight);
+        
+        const lines = pdf.splitTextToSize(text, maxWidth);
+        lines.forEach((line: string) => {
+          if (yPosition > 270) {
+            pdf.addPage();
+            yPosition = margin;
+          }
+          pdf.text(line, margin, yPosition);
+          yPosition += fontSize * 0.5;
+        });
+        yPosition += 5;
+      };
+
+      // Header
+      pdf.setFontSize(18);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(resumeData.personalInfo.name, margin, yPosition);
+      yPosition += 12;
+      
+      pdf.setFontSize(12);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text(resumeData.personalInfo.title, margin, yPosition);
+      yPosition += 8;
+      
+      pdf.setFontSize(10);
+      pdf.text(`Email: ${resumeData.personalInfo.email} | Phone: ${resumeData.personalInfo.phone}`, margin, yPosition);
+      yPosition += 6;
+      pdf.text(`Location: ${resumeData.personalInfo.location}`, margin, yPosition);
+      yPosition += 10;
+      
+      // Objective
+      addText('OBJECTIVE', 12, true);
+      addText(resumeData.personalInfo.objective, 10, false);
+      
+      // Education
+      addText('EDUCATION', 12, true);
+      resumeData.education.forEach(edu => {
+        addText(`${edu.degree} - ${edu.institution}`, 11, true);
+        addText(`${edu.period}${edu.gpa ? ' | ' + edu.gpa : ''}`, 10);
+        addText(edu.description, 10);
+        
+        if (edu.relevantCoursework) {
+          addText('Relevant Coursework:', 10, true);
+          addText(edu.relevantCoursework.join(', '), 9);
+        }
+      });
+      
+      // Experience
+      addText('PROFESSIONAL EXPERIENCE', 12, true);
+      resumeData.experience.forEach(exp => {
+        addText(`${exp.title} - ${exp.company}`, 11, true);
+        addText(exp.period, 10);
+        addText(exp.description, 10);
+        
+        if (exp.achievements) {
+          addText('Key Achievements:', 10, true);
+          exp.achievements.forEach(achievement => {
+            addText(`• ${achievement}`, 9);
+          });
+        }
+      });
+      
+      // Projects
+      addText('ACADEMIC & PERSONAL PROJECTS', 12, true);
+      resumeData.projects.forEach(project => {
+        addText(`${project.title} (${project.technologies})`, 11, true);
+        addText(project.description, 10);
+        if (project.features) {
+          addText(`Features: ${project.features}`, 9);
+        }
+      });
+      
+      // Technical Skills
+      addText('TECHNICAL SKILLS', 12, true);
+      Object.entries(resumeData.technicalSkills).forEach(([category, skills]) => {
+        const categoryName = category.replace(/([A-Z])/g, ' $1').trim();
+        addText(`${categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}: ${skills.join(', ')}`, 10);
+      });
+      
+      // Achievements
+      addText('ACHIEVEMENTS & AWARDS', 12, true);
+      resumeData.achievements.forEach(achievement => {
+        addText(`• ${achievement}`, 10);
+      });
+      
+      // Certifications
+      addText('CERTIFICATIONS', 12, true);
+      resumeData.certifications.forEach(cert => {
+        addText(`• ${cert}`, 10);
+      });
+      
+      // Save the PDF
+      pdf.save(`${resumeData.personalInfo.name.replace(/\s+/g, '_')}_Resume.pdf`);
+      toast.success('Resume downloaded successfully!');
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast.error('Failed to generate PDF. Please try again.');
+    }
   };
 
   const resumeData = {
