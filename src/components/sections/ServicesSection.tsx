@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Code, Wrench, Shield, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { Code, Wrench, Shield, Monitor, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ServicesSection = () => {
   const ref = useRef(null);
@@ -48,6 +48,13 @@ const ServicesSection = () => {
         { name: 'Security Training', link: 'https://www.cybrary.it/' },
         { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' }
       ]
+    },
+    {
+      icon: Monitor,
+      title: 'Cyber Cafe Services',
+      description: 'Complete internet cafe solutions and digital workspace management',
+      features: ['High-Speed Internet', 'Gaming Stations', 'Printing Services', 'Digital Workspace Setup'],
+      link: '#contact'
     },
   ];
 
