@@ -46,8 +46,7 @@ const ServicesSection = () => {
         { name: 'Malware Analysis', link: 'https://www.virustotal.com/' },
         { name: 'Digital Forensics', link: 'https://www.sans.org/digital-forensics/' },
         { name: 'Security Training', link: 'https://www.cybrary.it/' },
-        { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' },
-        { name: 'eCitizen Portal', link: 'https://www.ecitizen.go.ke/' }
+        { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' }
       ]
     },
     {
@@ -55,7 +54,13 @@ const ServicesSection = () => {
       title: 'Cyber Cafe Services',
       description: 'Complete internet cafe solutions and digital workspace management',
       features: ['High-Speed Internet', 'Gaming Stations', 'Printing Services', 'Digital Workspace Setup'],
-      link: '#contact'
+      link: '#contact',
+      subServices: [
+        { name: 'eCitizen Portal', link: 'https://www.ecitizen.go.ke/' },
+        { name: 'Document Printing', link: '#contact' },
+        { name: 'Internet Access', link: '#contact' },
+        { name: 'Gaming Services', link: '#contact' }
+      ]
     },
   ];
 
@@ -114,8 +119,8 @@ const ServicesSection = () => {
                 <ExternalLink className="w-4 h-4" />
               </a>
 
-              {/* Expandable features for cyber services */}
-              {service.title === 'Cybersecurity' && (
+              {/* Expandable features for services with subServices */}
+              {(service.title === 'Cybersecurity' || service.title === 'Cyber Cafe Services') && (
                 <div className="w-full px-4">
                   <button
                     onClick={() => setExpandedService(expandedService === service.title ? null : service.title)}
@@ -140,8 +145,8 @@ const ServicesSection = () => {
                         <a
                           key={subService.name}
                           href={subService.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          target={subService.link.startsWith('http') ? '_blank' : '_self'}
+                          rel={subService.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                           className="block text-sm text-muted-foreground hover:text-accent transition-colors duration-300 group/link"
                         >
                           <div className="flex items-center justify-between">
@@ -156,7 +161,7 @@ const ServicesSection = () => {
               )}
 
               {/* Regular features for other services */}
-              {service.title !== 'Cybersecurity' && (
+              {service.title !== 'Cybersecurity' && service.title !== 'Cyber Cafe Services' && (
                 <div className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <motion.div
