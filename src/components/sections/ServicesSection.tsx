@@ -46,7 +46,8 @@ const ServicesSection = () => {
         { name: 'Malware Analysis', link: 'https://www.virustotal.com/' },
         { name: 'Digital Forensics', link: 'https://www.sans.org/digital-forensics/' },
         { name: 'Security Training', link: 'https://www.cybrary.it/' },
-        { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' }
+        { name: 'Compliance Consulting', link: 'https://www.iso.org/isoiec-27001-information-security.html' },
+        { name: 'eCitizen Portal', link: 'https://www.ecitizen.go.ke/' }
       ]
     },
     {
