@@ -10,7 +10,7 @@ const SkillsSection = () => {
 
   useEffect(() => {
     if (isInView) {
-      setTimeout(() => setAnimateProgress(true), 500);
+      setTimeout(() => setAnimateProgress(true), 200);
     }
   }, [isInView]);
 
