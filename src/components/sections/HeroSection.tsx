@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, Mail } from 'lucide-react';
-import fredrickPortrait from '@/assets/fredrick-portrait.jpg';
+const profilePhoto = '/lovable-uploads/b3f63b1f-5ffb-44a5-bd1d-7fe39fe12f5f.png';
 
 const HeroSection = () => {
   const scrollToContact = () => {
@@ -122,7 +122,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  src={fredrickPortrait}
+                  src={profilePhoto}
                   alt="Fredrick Kitonyi Kiio - Professional Portrait"
                   className="w-full h-full object-cover"
                 />
