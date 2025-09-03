@@ -112,8 +112,44 @@ const ResumeSection = () => {
         addText(`• ${cert}`, 10);
       });
       
-      // Save the PDF
-      pdf.save(`${resumeData.personalInfo.name.replace(/\s+/g, '_')}_Resume.pdf`);
+      // Mobile-friendly download approach
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const fileName = `${resumeData.personalInfo.name.replace(/\s+/g, '_')}_Resume.pdf`;
+      
+      if (isMobile) {
+        // For mobile devices, open PDF in new tab
+        const pdfDataUri = pdf.output('datauristring');
+        const newWindow = window.open();
+        if (newWindow) {
+          newWindow.document.write(`
+            <html>
+              <head>
+                <title>${fileName}</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              </head>
+              <body style="margin:0;padding:0;">
+                <iframe src="${pdfDataUri}" style="width:100%;height:100vh;border:none;" title="Resume PDF"></iframe>
+              </body>
+            </html>
+          `);
+          newWindow.document.close();
+        } else {
+          // Fallback: try blob URL approach
+          const pdfBlob = pdf.output('blob');
+          const blobUrl = URL.createObjectURL(pdfBlob);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = fileName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+        }
+      } else {
+        // For desktop, use standard download
+        pdf.save(fileName);
+      }
+      
       toast.success('Resume downloaded successfully!');
       
     } catch (error) {
