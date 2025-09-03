@@ -44,7 +44,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <div className="font-medium">ICT Student | Web Developer | Tech Innovator</div>
+              <div className="font-medium">Software Engineering Student | Full Stack Developer | Tech Innovator</div>
             </motion.div>
 
             <motion.p
@@ -53,8 +53,8 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Passionate about building innovative technology solutions that address real-world challenges. 
-              Specializing in web development, IT support, and cybersecurity.
+              Passionate Software Engineering student at Zetech University with expertise in full-stack development, 
+              software architecture, and emerging technologies. Building innovative solutions for real-world challenges.
             </motion.p>
 
             {/* Action Buttons */}

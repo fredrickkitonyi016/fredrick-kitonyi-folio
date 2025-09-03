@@ -11,16 +11,16 @@ const ServicesSection = () => {
   const services = [
     {
       icon: Code,
-      title: 'Web Development',
-      description: 'Responsive websites & custom applications built with modern technologies',
-      features: ['React & JavaScript', 'Responsive Design', 'Custom Applications', 'E-commerce Solutions'],
+      title: 'Full Stack Development',
+      description: 'Modern web applications & scalable software solutions built with cutting-edge technologies',
+      features: ['React & Node.js', 'Cloud Architecture', 'API Development', 'Database Design'],
       link: '#portfolio'
     },
     {
       icon: Wrench,
-      title: 'IT Support',
-      description: 'Fast troubleshooting & comprehensive system maintenance services',
-      features: ['Hardware Diagnostics', 'Software Installation', 'Network Setup', 'System Optimization'],
+      title: 'Software Engineering',
+      description: 'Professional software development & system architecture consulting',
+      features: ['System Design', 'Code Review', 'DevOps Solutions', 'Performance Optimization'],
       link: '#contact'
     },
     {
@@ -78,7 +78,7 @@ const ServicesSection = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-accent to-secondary mx-auto mb-6"></div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive technology solutions designed to meet your digital needs
+            Comprehensive software development and technology solutions designed to meet your digital needs
           </p>
         </motion.div>
 

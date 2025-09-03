@@ -11,7 +11,7 @@ const AboutSection = () => {
     {
       icon: GraduationCap,
       label: 'Education',
-      value: 'ICS Technical College – Nairobi Branch (ICT Diploma)',
+      value: 'Zetech University - Nairobi Campus (Software Engineering Diploma)',
     },
     {
       icon: Mail,
@@ -58,18 +58,18 @@ const AboutSection = () => {
           >
             <div className="text-lg text-muted-foreground leading-relaxed">
               <p className="mb-6">
-                I'm <span className="text-accent font-semibold">Fredrick Kitonyi Kiio</span>, a passionate ICT student 
-                at ICS Technical College – Nairobi Branch. I'm committed to building innovative and practical 
-                technology solutions that address real-world challenges.
+                I'm <span className="text-accent font-semibold">Fredrick Kitonyi Kiio</span>, a passionate Software Engineering student 
+                at Zetech University - Nairobi Campus. I'm committed to building innovative and scalable 
+                software solutions that address real-world challenges.
               </p>
               <p className="mb-6">
-                I specialize in <span className="text-accent">web development</span>, <span className="text-accent">IT support</span>, 
-                <span className="text-accent"> computer hardware</span>, and <span className="text-accent">cybersecurity</span>. 
-                My goal is to leverage technology to create meaningful impact and drive digital transformation.
+                I specialize in <span className="text-accent">full-stack development</span>, <span className="text-accent">software architecture</span>, 
+                <span className="text-accent"> cloud computing</span>, and <span className="text-accent">modern web technologies</span>. 
+                My goal is to leverage cutting-edge technologies to create meaningful impact and drive digital transformation.
               </p>
               <p>
-                With a strong foundation in both software and hardware technologies, I'm always eager to learn 
-                new skills and take on challenging projects that push the boundaries of innovation.
+                With a strong foundation in software engineering principles and modern development practices, I'm always eager to learn 
+                new technologies and take on challenging projects that push the boundaries of innovation.
               </p>
             </div>
           </motion.div>
