@@ -125,29 +125,33 @@ const ResumeSection = () => {
   const resumeData = {
     personalInfo: {
       name: 'Fredrick Kitonyi Kiio',
-      title: 'ICT Diploma Student | Web Developer | Tech Innovator',
+      title: 'Software Engineering Student | Full Stack Developer | Tech Innovator',
       email: 'frimattechnologies016@gmail.com',
       phone: '+254 112 277 289',
       linkedin: 'linkedin.com/in/fredrickkitonyikiio',
       location: 'Nairobi, Kenya',
-      objective: 'Dedicated ICT diploma student with hands-on experience in web development, cybersecurity, and IT support. Seeking opportunities to apply technical skills and continue learning in the dynamic technology industry.'
+      objective: 'Passionate Software Engineering student at Zetech University with expertise in full-stack development, software architecture, and emerging technologies. Committed to building innovative solutions and contributing to cutting-edge software projects.'
     },
     education: [
       {
-        degree: 'Diploma in Information Communication Technology (ICT)',
-        institution: 'ICS Technical College - Nairobi Branch',
+        degree: 'Diploma in Software Engineering',
+        institution: 'Zetech University - Nairobi Campus',
         period: '2023 - 2025 (Expected)',
-        gpa: 'Current GPA: 3.8/4.0',
-        description: 'Comprehensive ICT program covering web development, cybersecurity, database management, networking, and IT support.',
+        gpa: 'Current GPA: 3.9/4.0',
+        description: 'Comprehensive Software Engineering program focusing on modern development practices, software architecture, and emerging technologies.',
         relevantCoursework: [
-          'Web Development & Programming',
-          'Database Design & Management',
-          'Network Administration',
-          'Cybersecurity Fundamentals',
-          'System Analysis & Design',
-          'Mobile App Development',
-          'IT Project Management',
-          'Digital Forensics'
+          'Object-Oriented Programming (Java, C++)',
+          'Web Development (React, Node.js, PHP)',
+          'Software Engineering Principles',
+          'Database Systems & Management',
+          'Data Structures & Algorithms',
+          'Mobile Application Development',
+          'Software Testing & Quality Assurance',
+          'Cloud Computing & DevOps',
+          'Artificial Intelligence & Machine Learning',
+          'Cybersecurity in Software Development',
+          'Project Management & Agile Methodologies',
+          'Human-Computer Interaction'
         ]
       },
       {
@@ -170,14 +174,15 @@ const ResumeSection = () => {
         ]
       },
       {
-        title: 'IT Support Intern',
-        company: 'Local IT Company',
-        period: '2024 (3 months)',
-        description: 'Provided technical support, hardware troubleshooting, and system maintenance services.',
+        title: 'Software Development Intern',
+        company: 'Zetech University Innovation Hub',
+        period: '2024 (4 months)',
+        description: 'Collaborated with faculty and fellow students on software development projects, contributing to university digital transformation initiatives.',
         achievements: [
-          'Resolved 95% of technical issues within 24 hours',
-          'Assisted in network setup for 20+ workstations',
-          'Reduced system downtime by 30%'
+          'Developed student portal enhancement features using React and Node.js',
+          'Contributed to 3 open-source projects hosted by Zetech GitHub',
+          'Led a team of 5 students in hackathon, winning 1st place',
+          'Mentored 10+ junior students in programming fundamentals'
         ]
       },
       {
@@ -200,10 +205,16 @@ const ResumeSection = () => {
         link: 'https://portfolio.example.com'
       },
       {
-        title: 'Student Management System',
-        technologies: 'PHP, MySQL, Bootstrap',
-        description: 'Web-based system for managing student records, grades, and course enrollment.',
-        features: 'User authentication, CRUD operations, reporting dashboard'
+        title: 'Zetech Student Portal Enhancement',
+        technologies: 'React, Node.js, PostgreSQL, Material-UI',
+        description: 'Enhanced the university student portal with modern UI/UX and additional features for better student experience.',
+        features: 'Real-time notifications, grade analytics, course planning, mobile responsiveness'
+      },
+      {
+        title: 'Campus Event Management System',
+        technologies: 'Java Spring Boot, MySQL, Angular',
+        description: 'Full-stack application for managing Zetech University campus events, bookings, and attendee management.',
+        features: 'Event scheduling, RSVP system, automated notifications, reporting dashboard'
       },
       {
         title: 'Cybersecurity Awareness App',
@@ -213,29 +224,35 @@ const ResumeSection = () => {
       }
     ],
     achievements: [
-      'Dean\'s List - Semester 1 & 2 (2024)',
-      'Best ICT Project Award - College Tech Fair 2024',
-      'Cybersecurity Competition - 2nd Place (Regional)',
-      'Volunteer IT Support - Local Community Center',
-      'Web Development Bootcamp Graduate - 2023'
+      'Dean\'s List - All Semesters (2023-2024) - Zetech University',
+      'Zetech Innovation Challenge Winner - Best Software Solution 2024',
+      'Google Developer Student Club - Lead Developer (Zetech Chapter)',
+      'Kenya University Software Engineering Competition - 1st Place',
+      'Zetech Hackathon 2024 - Grand Prize Winner',
+      'Academic Excellence Award - Software Engineering Department',
+      'Peer Tutor - Advanced Programming Courses at Zetech',
+      'Volunteer Developer - Zetech Alumni Association Portal'
     ],
     certifications: [
-      'Web Development Fundamentals - FreeCodeCamp',
-      'Cybersecurity Basics - Cisco Networking Academy',
-      'Network Administration - CompTIA Network+',
-      'Hardware Troubleshooting - A+ Certification',
-      'Digital Marketing - Google Digital Skills',
-      'Python Programming - Codecademy',
-      'Database Management - MySQL Certification',
-      'IT Project Management - PMI Fundamentals'
+      'Oracle Certified Associate - Java SE 8 Programmer',
+      'AWS Certified Cloud Practitioner',
+      'Google Cloud Professional - Cloud Developer',
+      'Microsoft Azure Fundamentals (AZ-900)',
+      'Scrum Master Certified (SMC) - Scrum Study',
+      'Full Stack Web Development - Zetech University Certificate',
+      'Advanced React Development - Meta Blueprint',
+      'Machine Learning Foundations - IBM Certificate',
+      'Cybersecurity Essentials - Cisco Networking Academy',
+      'Git & GitHub Mastery - Zetech Professional Development'
     ],
     technicalSkills: {
-      programming: ['JavaScript', 'Python', 'PHP', 'HTML5', 'CSS3', 'SQL'],
-      frameworks: ['React', 'Node.js', 'Bootstrap', 'Tailwind CSS', 'Express.js'],
-      databases: ['MySQL', 'MongoDB', 'Firebase', 'SQLite'],
-      tools: ['Git', 'VS Code', 'Figma', 'Photoshop', 'Linux', 'Windows Server'],
-      networking: ['TCP/IP', 'DNS', 'DHCP', 'VPN Setup', 'Router Configuration'],
-      cybersecurity: ['Penetration Testing', 'Vulnerability Assessment', 'Malware Analysis']
+      programming: ['Java', 'JavaScript', 'Python', 'C++', 'TypeScript', 'PHP', 'HTML5', 'CSS3', 'SQL'],
+      frameworks: ['React', 'Angular', 'Spring Boot', 'Node.js', 'Express.js', 'Django', 'Bootstrap', 'Tailwind CSS'],
+      databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Oracle Database', 'Firebase', 'Redis'],
+      cloudPlatforms: ['AWS (EC2, S3, Lambda)', 'Google Cloud Platform', 'Microsoft Azure', 'Heroku'],
+      tools: ['Git', 'Docker', 'Kubernetes', 'Jenkins', 'VS Code', 'IntelliJ IDEA', 'Postman', 'Jira'],
+      methodologies: ['Agile/Scrum', 'DevOps', 'CI/CD', 'Test-Driven Development', 'Object-Oriented Design'],
+      softwareEngineering: ['Software Architecture', 'Design Patterns', 'Code Review', 'Version Control', 'API Development']
     }
   };
 
