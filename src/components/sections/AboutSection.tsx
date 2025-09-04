@@ -11,7 +11,7 @@ const AboutSection = () => {
     {
       icon: GraduationCap,
       label: 'Education',
-      value: 'Zetech University - Nairobi Campus (Software Engineering Diploma)',
+      value: 'Zetech University (Software Engineering) | ICS Technical College (ICT Diploma)',
     },
     {
       icon: Mail,
@@ -59,13 +59,14 @@ const AboutSection = () => {
             <div className="text-lg text-muted-foreground leading-relaxed">
               <p className="mb-6">
                 I'm <span className="text-accent font-semibold">Fredrick Kitonyi Kiio</span>, a passionate Software Engineering student 
-                at Zetech University - Nairobi Campus. I'm committed to building innovative and scalable 
-                software solutions that address real-world challenges.
+                at Zetech University - Nairobi Campus with a strong foundation from my ICT Diploma at ICS Technical College. 
+                I'm committed to building innovative and scalable software solutions that address real-world challenges.
               </p>
               <p className="mb-6">
+                My educational journey began at ICS Technical College where I built a solid foundation in <span className="text-accent">information technology</span> and 
+                <span className="text-accent"> programming fundamentals</span>. Currently pursuing Software Engineering at Zetech University, 
                 I specialize in <span className="text-accent">full-stack development</span>, <span className="text-accent">software architecture</span>, 
-                <span className="text-accent"> cloud computing</span>, and <span className="text-accent">modern web technologies</span>. 
-                My goal is to leverage cutting-edge technologies to create meaningful impact and drive digital transformation.
+                <span className="text-accent"> cloud computing</span>, and <span className="text-accent">modern web technologies</span>.
               </p>
               <p>
                 With a strong foundation in software engineering principles and modern development practices, I'm always eager to learn 
