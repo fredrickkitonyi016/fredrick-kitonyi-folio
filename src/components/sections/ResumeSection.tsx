@@ -191,11 +191,11 @@ const ResumeSection = () => {
         ]
       },
       {
-        degree: 'Certificate in Information Technology',
+        degree: 'Diploma in ICT',
         institution: 'ICS Technical College - Nairobi',
         period: '2022 - 2023',
         gpa: 'GPA: 3.8/4.0',
-        description: 'Technical foundation program covering essential IT skills, computer systems, and software development fundamentals.',
+        description: 'Comprehensive ICT program covering essential information technology skills, computer systems, and software development fundamentals.',
         relevantCoursework: [
           'Computer Fundamentals & Hardware',
           'Programming Basics (Java, Python)',
