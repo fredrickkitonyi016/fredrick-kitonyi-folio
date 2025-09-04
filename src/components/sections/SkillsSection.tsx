@@ -8,9 +8,15 @@ const SkillsSection = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const [animateProgress, setAnimateProgress] = useState(false);
 
+  console.log('SkillsSection: Component rendering', { isInView });
+
   useEffect(() => {
+    console.log('SkillsSection: useEffect triggered', { isInView });
     if (isInView) {
-      setTimeout(() => setAnimateProgress(true), 200);
+      setTimeout(() => {
+        console.log('SkillsSection: Setting animateProgress to true');
+        setAnimateProgress(true);
+      }, 200);
     }
   }, [isInView]);
 
