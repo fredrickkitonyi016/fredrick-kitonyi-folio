@@ -191,6 +191,25 @@ const ResumeSection = () => {
         ]
       },
       {
+        degree: 'Certificate in Information Technology',
+        institution: 'ICS Technical College - Nairobi',
+        period: '2022 - 2023',
+        gpa: 'GPA: 3.8/4.0',
+        description: 'Technical foundation program covering essential IT skills, computer systems, and software development fundamentals.',
+        relevantCoursework: [
+          'Computer Fundamentals & Hardware',
+          'Programming Basics (Java, Python)',
+          'Web Development Fundamentals',
+          'Database Design & SQL',
+          'Networking Essentials',
+          'System Administration',
+          'Microsoft Office Suite',
+          'Digital Literacy & Ethics',
+          'Technical Communication',
+          'IT Project Management'
+        ]
+      },
+      {
         degree: 'Kenya Certificate of Secondary Education (KCSE)',
         institution: 'Local Secondary School',
         period: '2019 - 2022',
