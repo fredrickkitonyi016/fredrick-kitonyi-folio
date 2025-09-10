@@ -1,23 +1,15 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Download, FileText, User, GraduationCap, Briefcase, Award, BookOpen, Trophy, Code } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Download, FileText, User, GraduationCap, Briefcase, Award, Trophy } from 'lucide-react';
 import { toast } from 'sonner';
 import jsPDF from 'jspdf';
-import ResumePreviewModal from '../ui/resume-preview-modal';
 
-const ResumeSection = () => {
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+interface ResumePreviewModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-  console.log('ResumeSection: Component rendering', { isInView });
-
-  const openResumePreview = () => {
-    setIsResumeModalOpen(true);
-  };
-
+const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
   const handleDownload = () => {
     try {
       const pdf = new jsPDF();
@@ -160,6 +152,7 @@ const ResumeSection = () => {
       }
       
       toast.success('Resume downloaded successfully!');
+      onClose(); // Close modal after download
       
     } catch (error) {
       console.error('Error generating PDF:', error);
@@ -175,7 +168,7 @@ const ResumeSection = () => {
       phone: '+254 112 277 289',
       linkedin: 'linkedin.com/in/fredrickkitonyikiio',
       location: 'Nairobi, Kenya',
-      objective: 'Passionate Software Engineering student at Zetech University with expertise in full-stack development, software architecture, and emerging technologies. Committed to building innovative solutions and contributing to cutting-edge software projects.'
+      objective: 'Passionate Software Engineering student at Zetech University with strong foundation from ICT Diploma at ICS Technical College. Committed to building innovative solutions and contributing to cutting-edge software projects with expertise in full-stack development and emerging technologies.'
     },
     education: [
       {
@@ -288,7 +281,7 @@ const ResumeSection = () => {
       }
     ],
     achievements: [
-      'Dean\'s List - All Semesters (2023-2024) - Zetech University',
+      "Dean's List - All Semesters (2023-2024) - Zetech University",
       'Zetech Innovation Challenge Winner - Best Software Solution 2024',
       'Google Developer Student Club - Lead Developer (Zetech Chapter)',
       'Kenya University Software Engineering Competition - 1st Place',
@@ -320,284 +313,216 @@ const ResumeSection = () => {
     }
   };
 
-  const resumeSections = [
-    {
-      icon: User,
-      title: 'Personal Information',
-      content: resumeData.personalInfo,
-    },
-    {
-      icon: GraduationCap,
-      title: 'Education',
-      content: resumeData.education,
-    },
-    {
-      icon: Briefcase,
-      title: 'Experience',
-      content: resumeData.experience,
-    },
-    {
-      icon: Award,
-      title: 'Certifications',
-      content: resumeData.certifications,
-    },
-  ];
-
   return (
-    <section id="resume" className="py-20 bg-card/20 relative" ref={ref}>
-      <div className="container mx-auto px-4">
+    <AnimatePresence>
+      {isOpen && (
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={onClose}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            My <span className="bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">Resume</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-accent to-secondary mx-auto mb-6"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive overview of my education, experience, and qualifications
-          </p>
-        </motion.div>
-
-        {/* Download Button */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-            <motion.button
-              onClick={openResumePreview}
-              className="btn-hero inline-flex items-center gap-3 text-lg px-8 py-4"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Download size={24} />
-              Download Full Resume (PDF)
-              <FileText size={24} />
-            </motion.button>
-        </motion.div>
-
-        {/* Resume Preview */}
-        <div className="max-w-4xl mx-auto">
           <motion.div
-            className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-card border border-border rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Header with Objective */}
-            <div className="text-center mb-8 pb-6 border-b border-border">
-              <h3 className="text-3xl font-bold text-foreground mb-2">
-                {resumeData.personalInfo.name}
-              </h3>
-              <p className="text-lg text-accent mb-4">{resumeData.personalInfo.title}</p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground mb-4">
-                <span>{resumeData.personalInfo.email}</span>
-                <span>•</span>
-                <span>{resumeData.personalInfo.phone}</span>
-                <span>•</span>
-                <span>{resumeData.personalInfo.location}</span>
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-border">
+              <h2 className="text-2xl font-bold">Resume Preview</h2>
+              <div className="flex items-center gap-3">
+                <motion.button
+                  onClick={handleDownload}
+                  className="btn-hero inline-flex items-center gap-2 text-sm px-4 py-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Download size={16} />
+                  Download PDF
+                </motion.button>
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
+                >
+                  <X size={20} />
+                </button>
               </div>
-              <p className="text-muted-foreground max-w-3xl mx-auto text-sm italic">
-                {resumeData.personalInfo.objective}
-              </p>
             </div>
 
-            {/* Education with Coursework */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <GraduationCap className="w-5 h-5 text-accent" />
+            {/* Resume Content */}
+            <div className="p-6">
+              {/* Header */}
+              <div className="text-center mb-8 pb-6 border-b border-border">
+                <h3 className="text-3xl font-bold text-foreground mb-2">
+                  {resumeData.personalInfo.name}
+                </h3>
+                <p className="text-lg text-accent mb-4">{resumeData.personalInfo.title}</p>
+                <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground mb-4">
+                  <span>{resumeData.personalInfo.email}</span>
+                  <span>•</span>
+                  <span>{resumeData.personalInfo.phone}</span>
+                  <span>•</span>
+                  <span>{resumeData.personalInfo.location}</span>
                 </div>
-                <h4 className="text-xl font-bold text-foreground">Education</h4>
+                <p className="text-muted-foreground max-w-3xl mx-auto text-sm italic">
+                  {resumeData.personalInfo.objective}
+                </p>
               </div>
-              {resumeData.education.map((edu, index) => (
-                <div key={index} className="mb-6 p-4 bg-background/50 rounded-lg">
-                  <h5 className="font-semibold text-foreground">{edu.degree}</h5>
-                  <p className="text-accent text-sm">{edu.institution}</p>
-                  <p className="text-muted-foreground text-sm">{edu.period}</p>
-                  {edu.gpa && <p className="text-accent text-sm font-medium">{edu.gpa}</p>}
-                  <p className="text-muted-foreground text-sm mt-2">{edu.description}</p>
-                  {edu.relevantCoursework && (
-                    <div className="mt-3">
-                      <p className="text-foreground text-sm font-medium mb-2">Relevant Coursework:</p>
-                      <div className="grid grid-cols-2 gap-1">
-                        {edu.relevantCoursework.map((course, courseIndex) => (
-                          <span key={courseIndex} className="text-muted-foreground text-xs">
-                            • {course}
-                          </span>
-                        ))}
+
+              {/* Education */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <GraduationCap className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-bold text-foreground">Education</h4>
+                </div>
+                {resumeData.education.map((edu, index) => (
+                  <div key={index} className="mb-6 p-4 bg-background/50 rounded-lg">
+                    <h5 className="font-semibold text-foreground">{edu.degree}</h5>
+                    <p className="text-accent text-sm">{edu.institution}</p>
+                    <p className="text-muted-foreground text-sm">{edu.period}</p>
+                    {edu.gpa && <p className="text-accent text-sm font-medium">{edu.gpa}</p>}
+                    <p className="text-muted-foreground text-sm mt-2">{edu.description}</p>
+                    {edu.relevantCoursework && (
+                      <div className="mt-3">
+                        <p className="text-sm font-medium text-foreground mb-2">Relevant Coursework:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {edu.relevantCoursework.map((course, idx) => (
+                            <span key={idx} className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">
+                              {course}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Experience with Achievements */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <Briefcase className="w-5 h-5 text-accent" />
-                </div>
-                <h4 className="text-xl font-bold text-foreground">Professional Experience</h4>
+                    )}
+                  </div>
+                ))}
               </div>
-              {resumeData.experience.map((exp, index) => (
-                <div key={index} className="mb-4 p-4 bg-background/50 rounded-lg">
-                  <h5 className="font-semibold text-foreground">{exp.title}</h5>
-                  <p className="text-accent text-sm">{exp.company}</p>
-                  <p className="text-muted-foreground text-sm">{exp.period}</p>
-                  <p className="text-muted-foreground text-sm mt-2">{exp.description}</p>
-                  {exp.achievements && (
-                    <div className="mt-3">
-                      <p className="text-foreground text-sm font-medium mb-1">Key Achievements:</p>
-                      {exp.achievements.map((achievement, achIndex) => (
-                        <p key={achIndex} className="text-muted-foreground text-xs ml-2">
-                          • {achievement}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </motion.div>
 
-            {/* Projects */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <Code className="w-5 h-5 text-accent" />
+              {/* Experience */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <Briefcase className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-bold text-foreground">Professional Experience</h4>
                 </div>
-                <h4 className="text-xl font-bold text-foreground">Academic & Personal Projects</h4>
+                {resumeData.experience.map((exp, index) => (
+                  <div key={index} className="mb-6 p-4 bg-background/50 rounded-lg">
+                    <h5 className="font-semibold text-foreground">{exp.title}</h5>
+                    <p className="text-accent text-sm">{exp.company}</p>
+                    <p className="text-muted-foreground text-sm">{exp.period}</p>
+                    <p className="text-muted-foreground text-sm mt-2">{exp.description}</p>
+                    {exp.achievements && (
+                      <div className="mt-3">
+                        <p className="text-sm font-medium text-foreground mb-2">Key Achievements:</p>
+                        <ul className="text-sm text-muted-foreground space-y-1">
+                          {exp.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <span className="text-accent mr-2">•</span>
+                              {achievement}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+              {/* Projects */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <FileText className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-bold text-foreground">Projects</h4>
+                </div>
                 {resumeData.projects.map((project, index) => (
-                  <div key={index} className="p-4 bg-background/50 rounded-lg">
-                    <h5 className="font-semibold text-foreground mb-2">{project.title}</h5>
-                    <p className="text-accent text-xs mb-2">{project.technologies}</p>
-                    <p className="text-muted-foreground text-sm mb-2">{project.description}</p>
+                  <div key={index} className="mb-4 p-4 bg-background/50 rounded-lg">
+                    <h5 className="font-semibold text-foreground">{project.title}</h5>
+                    <p className="text-accent text-sm">{project.technologies}</p>
+                    <p className="text-muted-foreground text-sm mt-2">{project.description}</p>
                     {project.features && (
-                      <p className="text-muted-foreground text-xs">
-                        <strong>Features:</strong> {project.features}
+                      <p className="text-sm text-muted-foreground mt-2">
+                        <span className="font-medium">Features:</span> {project.features}
                       </p>
                     )}
                   </div>
                 ))}
               </div>
-            </motion.div>
 
-            {/* Technical Skills */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <BookOpen className="w-5 h-5 text-accent" />
+              {/* Technical Skills */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <Award className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-bold text-foreground">Technical Skills</h4>
                 </div>
-                <h4 className="text-xl font-bold text-foreground">Technical Skills</h4>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                {Object.entries(resumeData.technicalSkills).map(([category, skills]) => (
-                  <div key={category} className="p-3 bg-background/50 rounded-lg">
-                    <h6 className="font-medium text-foreground mb-2 capitalize">
-                      {category.replace(/([A-Z])/g, ' $1').trim()}
-                    </h6>
-                    <div className="flex flex-wrap gap-1">
-                      {skills.map((skill, skillIndex) => (
-                        <span
-                          key={skillIndex}
-                          className="bg-accent/10 text-accent text-xs px-2 py-1 rounded"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                <div className="grid gap-4">
+                  {Object.entries(resumeData.technicalSkills).map(([category, skills]) => (
+                    <div key={category} className="p-4 bg-background/50 rounded-lg">
+                      <h5 className="font-medium text-foreground mb-2 capitalize">
+                        {category.replace(/([A-Z])/g, ' $1').trim()}
+                      </h5>
+                      <div className="flex flex-wrap gap-1">
+                        {skills.map((skill, idx) => (
+                          <span key={idx} className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Achievements */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 1.6 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <Trophy className="w-5 h-5 text-accent" />
+                  ))}
                 </div>
-                <h4 className="text-xl font-bold text-foreground">Achievements & Awards</h4>
               </div>
-              <div className="grid md:grid-cols-2 gap-3">
-                {resumeData.achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className="bg-accent/10 border border-accent/20 rounded-lg p-3"
-                  >
-                    <span className="text-accent text-sm font-medium">{achievement}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
 
-            {/* Certifications */}
-            <motion.div
-              className="border-t border-border pt-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 1.8 }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                  <Award className="w-5 h-5 text-accent" />
-                </div>
-                <h4 className="text-xl font-bold text-foreground">Certifications</h4>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {resumeData.certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="bg-background/50 border border-border rounded-lg p-3 text-center"
-                  >
-                    <span className="text-accent text-sm font-medium">{cert}</span>
+              {/* Achievements */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <Trophy className="w-5 h-5 text-accent" />
                   </div>
-                ))}
+                  <h4 className="text-xl font-bold text-foreground">Achievements & Awards</h4>
+                </div>
+                <div className="space-y-2">
+                  {resumeData.achievements.map((achievement, index) => (
+                    <div key={index} className="flex items-start p-3 bg-background/50 rounded-lg">
+                      <span className="text-accent mr-2 mt-1">•</span>
+                      <span className="text-sm text-muted-foreground">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
+
+              {/* Certifications */}
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                    <Award className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-bold text-foreground">Certifications</h4>
+                </div>
+                <div className="space-y-2">
+                  {resumeData.certifications.map((cert, index) => (
+                    <div key={index} className="flex items-start p-3 bg-background/50 rounded-lg">
+                      <span className="text-accent mr-2 mt-1">•</span>
+                      <span className="text-sm text-muted-foreground">{cert}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
-        </div>
-      </div>
-
-      {/* Resume Preview Modal */}
-      <ResumePreviewModal 
-        isOpen={isResumeModalOpen} 
-        onClose={() => setIsResumeModalOpen(false)} 
-      />
-    </section>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
-export default ResumeSection;
+export default ResumePreviewModal;

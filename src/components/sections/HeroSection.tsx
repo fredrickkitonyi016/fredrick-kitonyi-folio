@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, Mail } from 'lucide-react';
+import ResumePreviewModal from '../ui/resume-preview-modal';
 const profilePhoto = '/lovable-uploads/b3f63b1f-5ffb-44a5-bd1d-7fe39fe12f5f.png';
 
 const HeroSection = () => {
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+
   const scrollToContact = () => {
     const contactSection = document.querySelector('#contact');
     if (contactSection) {
@@ -10,12 +14,8 @@ const HeroSection = () => {
     }
   };
 
-  const downloadResume = () => {
-    // Create a downloadable PDF link - for now using a placeholder
-    const link = document.createElement('a');
-    link.href = '#'; // Will be replaced with actual PDF
-    link.download = 'Fredrick_Kitonyi_Kiio_Resume.pdf';
-    link.click();
+  const openResumePreview = () => {
+    setIsResumeModalOpen(true);
   };
 
   return (
@@ -65,7 +65,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.9 }}
             >
               <motion.button
-                onClick={downloadResume}
+                onClick={openResumePreview}
                 className="btn-hero inline-flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -138,6 +138,12 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Resume Preview Modal */}
+      <ResumePreviewModal 
+        isOpen={isResumeModalOpen} 
+        onClose={() => setIsResumeModalOpen(false)} 
+      />
     </section>
   );
 };
