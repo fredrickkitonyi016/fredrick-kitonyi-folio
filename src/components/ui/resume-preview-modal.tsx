@@ -213,9 +213,15 @@ const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
       },
       {
         degree: 'Kenya Certificate of Secondary Education (KCSE)',
-        institution: 'Local Secondary School',
+        institution: 'Katelembo Centre of Excellence Boys High School',
         period: '2019 - 2022',
         description: 'Completed secondary education with focus on Mathematics, Computer Studies, and Physics.'
+      },
+      {
+        degree: 'Kenya Certificate of Primary Education (KCPE)',
+        institution: 'Machakos Primary School',
+        period: '2011 - 2018',
+        description: 'Completed primary education with excellent performance in core subjects including Mathematics, English, Science, and Kiswahili.'
       }
     ],
     experience: [
