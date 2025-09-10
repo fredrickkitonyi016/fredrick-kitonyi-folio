@@ -22,7 +22,6 @@ const Navigation = () => {
     { name: 'Services', href: '#services', isLink: false },
     { name: 'Skills', href: '#skills', isLink: false },
     { name: 'Portfolio', href: '#portfolio', isLink: false },
-    { name: 'Resume', href: '/resume', isLink: true },
     { name: 'Contact', href: '#contact', isLink: false },
   ];
 
