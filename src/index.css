@@ -3,59 +3,59 @@
 @tailwind utilities;
 
 /* Professional Portfolio Design System - Fredrick Kitonyi Kiio
-Dark Blue (#0B1F3A) & Gold (#FFD700) Theme with Poppins Font
+Modern Purple & Cyan Theme with Poppins Font
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     /* Base Colors */
-    --background: 210 58% 11%; /* Dark navy blue */
-    --foreground: 210 40% 98%; /* Light text */
+    --background: 263 50% 8%; /* Deep purple-black */
+    --foreground: 280 15% 95%; /* Light purple-white text */
 
     /* Card Colors */
-    --card: 210 50% 15%; /* Slightly lighter than background */
-    --card-foreground: 210 40% 98%;
+    --card: 263 40% 12%; /* Slightly lighter than background */
+    --card-foreground: 280 15% 95%;
 
     /* Popover Colors */
-    --popover: 210 50% 15%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 263 40% 12%;
+    --popover-foreground: 280 15% 95%;
 
-    /* Primary - Dark Blue */
-    --primary: 210 58% 11%; /* #0B1F3A equivalent */
-    --primary-foreground: 210 40% 98%;
-    --primary-hover: 210 50% 15%;
+    /* Primary - Deep Purple */
+    --primary: 263 50% 15%; /* Rich purple */
+    --primary-foreground: 280 15% 95%;
+    --primary-hover: 263 45% 20%;
 
-    /* Secondary - Gold Accent */
-    --secondary: 51 100% 50%; /* #FFD700 equivalent */
-    --secondary-foreground: 210 58% 11%;
-    --secondary-hover: 51 100% 45%;
+    /* Secondary - Vibrant Cyan */
+    --secondary: 180 100% 50%; /* Bright cyan */
+    --secondary-foreground: 263 50% 8%;
+    --secondary-hover: 180 100% 45%;
 
     /* Muted Colors */
-    --muted: 210 40% 20%;
-    --muted-foreground: 210 20% 65%;
+    --muted: 263 30% 20%;
+    --muted-foreground: 263 15% 65%;
 
-    /* Accent - Gold */
-    --accent: 51 100% 50%; /* Gold */
-    --accent-foreground: 210 58% 11%;
+    /* Accent - Electric Blue */
+    --accent: 200 100% 60%; /* Electric blue */
+    --accent-foreground: 263 50% 8%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 280 15% 95%;
 
     /* Borders and Inputs */
-    --border: 210 30% 25%;
-    --input: 210 30% 20%;
-    --ring: 51 100% 50%; /* Gold ring */
+    --border: 263 25% 25%;
+    --input: 263 30% 18%;
+    --ring: 200 100% 60%; /* Electric blue ring */
 
     /* Design System Extras */
-    --gradient-primary: linear-gradient(135deg, hsl(210, 58%, 11%), hsl(210, 70%, 8%));
-    --gradient-secondary: linear-gradient(135deg, hsl(51, 100%, 50%), hsl(45, 100%, 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(210, 58%, 11%), hsl(210, 80%, 5%));
+    --gradient-primary: linear-gradient(135deg, hsl(263, 50%, 8%), hsl(263, 60%, 5%));
+    --gradient-secondary: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(200, 100%, 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(263, 50%, 8%), hsl(280, 70%, 5%));
     
-    /* Shadows with gold glow */
-    --shadow-glow: 0 0 40px hsl(51 100% 50% / 0.3);
-    --shadow-card: 0 10px 30px -10px hsl(210 58% 5% / 0.5);
+    /* Shadows with cyan glow */
+    --shadow-glow: 0 0 40px hsl(180 100% 50% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(263 50% 3% / 0.5);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
