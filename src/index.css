@@ -3,84 +3,66 @@
 @tailwind utilities;
 
 /* Professional Portfolio Design System - Fredrick Kitonyi Kiio
-Modern Purple & Cyan Theme with Poppins Font
+Forest Green & Emerald Theme with Poppins Font
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     /* Base Colors */
-    --background: 263 50% 8%; /* Deep purple-black */
-    --foreground: 280 15% 95%; /* Light purple-white text */
+    --background: 135 80% 8%; /* Deep forest green */
+    --foreground: 120 15% 95%; /* Light green-white text */
 
     /* Card Colors */
-    --card: 263 40% 12%; /* Slightly lighter than background */
-    --card-foreground: 280 15% 95%;
+    --card: 135 60% 12%; /* Slightly lighter than background */
+    --card-foreground: 120 15% 95%;
 
     /* Popover Colors */
-    --popover: 263 40% 12%;
-    --popover-foreground: 280 15% 95%;
+    --popover: 135 60% 12%;
+    --popover-foreground: 120 15% 95%;
 
-    /* Primary - Deep Purple */
-    --primary: 263 50% 15%; /* Rich purple */
-    --primary-foreground: 280 15% 95%;
-    --primary-hover: 263 45% 20%;
+    /* Primary - Forest Green */
+    --primary: 135 80% 15%; /* Rich forest green */
+    --primary-foreground: 120 15% 95%;
+    --primary-hover: 135 75% 20%;
 
-    /* Secondary - Vibrant Cyan */
-    --secondary: 180 100% 50%; /* Bright cyan */
-    --secondary-foreground: 263 50% 8%;
-    --secondary-hover: 180 100% 45%;
+    /* Secondary - Vibrant Emerald */
+    --secondary: 150 100% 50%; /* Vibrant emerald */
+    --secondary-foreground: 135 80% 8%;
+    --secondary-hover: 150 100% 45%;
 
     /* Muted Colors */
-    --muted: 263 30% 20%;
-    --muted-foreground: 263 15% 65%;
+    --muted: 135 50% 20%;
+    --muted-foreground: 135 20% 65%;
 
-    /* Accent - Electric Blue */
-    --accent: 200 100% 60%; /* Electric blue */
-    --accent-foreground: 263 50% 8%;
+    /* Accent - Electric Lime */
+    --accent: 80 100% 60%; /* Electric lime */
+    --accent-foreground: 135 80% 8%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 280 15% 95%;
+    --destructive-foreground: 120 15% 95%;
 
     /* Borders and Inputs */
-    --border: 263 25% 25%;
-    --input: 263 30% 18%;
-    --ring: 200 100% 60%; /* Electric blue ring */
+    --border: 135 40% 25%;
+    --input: 135 50% 18%;
+    --ring: 80 100% 60%; /* Electric lime ring */
 
     /* Design System Extras */
-    --gradient-primary: linear-gradient(135deg, hsl(263, 50%, 8%), hsl(263, 60%, 5%));
-    --gradient-secondary: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(200, 100%, 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(263, 50%, 8%), hsl(280, 70%, 5%));
+    --gradient-primary: linear-gradient(135deg, hsl(135 80% 8%), hsl(135 90% 5%));
+    --gradient-secondary: linear-gradient(135deg, hsl(150 100% 50%), hsl(80 100% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(135 80% 8%), hsl(120 90% 5%));
     
-    /* Shadows with cyan glow */
-    --shadow-glow: 0 0 40px hsl(180 100% 50% / 0.3);
-    --shadow-card: 0 10px 30px -10px hsl(263 50% 3% / 0.5);
+    /* Shadows with emerald glow */
+    --shadow-glow: 0 0 40px hsl(150 100% 50% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(135 80% 3% / 0.5);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.75rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  /* Dark theme is default - no separate dark class needed */
 }
 
 @layer base {
