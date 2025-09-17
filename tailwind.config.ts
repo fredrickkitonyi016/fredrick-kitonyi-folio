@@ -65,6 +65,7 @@ export default {
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',
+				'green-glow': 'var(--shadow-green-glow)',
 				'card': 'var(--shadow-card)',
 			},
 			transitionTimingFunction: {

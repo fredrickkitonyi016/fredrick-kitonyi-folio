@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, Info, Wrench, Zap, Palette, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
@@ -17,12 +17,12 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home', isLink: false },
-    { name: 'About', href: '#about', isLink: false },
-    { name: 'Services', href: '#services', isLink: false },
-    { name: 'Skills', href: '#skills', isLink: false },
-    { name: 'Portfolio', href: '#portfolio', isLink: false },
-    { name: 'Contact', href: '#contact', isLink: false },
+    { name: 'Home', href: '#home', icon: Home, isLink: false },
+    { name: 'About', href: '#about', icon: Info, isLink: false },
+    { name: 'Services', href: '#services', icon: Wrench, isLink: false },
+    { name: 'Skills', href: '#skills', icon: Zap, isLink: false },
+    { name: 'Portfolio', href: '#portfolio', icon: Palette, isLink: false },
+    { name: 'Contact', href: '#contact', icon: Phone, isLink: false },
   ];
 
   const scrollToSection = (href: string) => {
@@ -33,16 +33,13 @@ const Navigation = () => {
     }
   };
 
-  const handleNavigation = (item: { name: string; href: string; isLink: boolean }) => {
+  const handleNavigation = (item: { name: string; href: string; icon: any; isLink: boolean }) => {
     if (item.isLink) {
-      // For external links or routes, let React Router handle it
       setIsMobileMenuOpen(false);
     } else {
-      // For scroll-to sections, only work on home page
       if (location.pathname === '/') {
         scrollToSection(item.href);
       } else {
-        // If not on home page, navigate to home first
         window.location.href = `/${item.href}`;
       }
     }
@@ -52,8 +49,10 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/90 backdrop-blur-md shadow-card' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'navbar-solid text-white' 
+          : 'navbar-transparent text-foreground'
       }`}
     >
       <div className="container mx-auto px-4 py-4">
@@ -66,44 +65,50 @@ const Navigation = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item, index) => (
-              item.isLink ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-foreground hover:text-accent transition-colors duration-300 relative group"
-                >
-                  <motion.div
+          <div className="hidden md:flex items-center space-x-2">
+            {navItems.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                item.isLink ? (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="nav-link"
+                  >
+                    <motion.div
+                      className="flex items-center gap-2"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <IconComponent size={18} />
+                      {item.name}
+                    </motion.div>
+                  </Link>
+                ) : (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => handleNavigation(item)}
+                    className="nav-link"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
                   >
+                    <IconComponent size={18} />
                     {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
-                  </motion.div>
-                </Link>
-              ) : (
-                <motion.button
-                  key={item.name}
-                  onClick={() => handleNavigation(item)}
-                  className="text-foreground hover:text-accent transition-colors duration-300 relative group"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
-                </motion.button>
-              )
-            ))}
+                  </motion.button>
+                )
+              );
+            })}
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden text-foreground hover:text-accent transition-colors"
+            className={`md:hidden transition-colors ${
+              isScrolled ? 'text-white hover:text-accent' : 'text-foreground hover:text-accent'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
           >
@@ -117,37 +122,43 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 bg-card/50 backdrop-blur-md rounded-lg p-4"
+            className="md:hidden mt-4 bg-card/95 backdrop-blur-md rounded-lg p-4 shadow-green-glow"
           >
-            {navItems.map((item, index) => (
-              item.isLink ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full text-left py-2 text-foreground hover:text-accent transition-colors"
-                >
-                  <motion.div
+            {navItems.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                item.isLink ? (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 w-full text-left py-3 px-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-lg transition-all duration-300"
+                  >
+                    <motion.div
+                      className="flex items-center gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <IconComponent size={18} />
+                      {item.name}
+                    </motion.div>
+                  </Link>
+                ) : (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => handleNavigation(item)}
+                    className="flex items-center gap-3 w-full text-left py-3 px-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-lg transition-all duration-300"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
+                    <IconComponent size={18} />
                     {item.name}
-                  </motion.div>
-                </Link>
-              ) : (
-                <motion.button
-                  key={item.name}
-                  onClick={() => handleNavigation(item)}
-                  className="block w-full text-left py-2 text-foreground hover:text-accent transition-colors"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {item.name}
-                </motion.button>
-              )
-            ))}
+                  </motion.button>
+                )
+              );
+            })}
           </motion.div>
         )}
       </div>
